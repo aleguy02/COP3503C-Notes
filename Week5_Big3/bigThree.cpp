@@ -1,11 +1,11 @@
-// This demo DOES NOT use dynamic memory. For an example with dynamic memory, look at bigThree_alt.cpp
-// TODO: make bigThree_alt.cpp
+// This demo DOES NOT use dynamic memory. For an example with dynamic memory, look at bigThree_dynamicMem.cpp
 
 #include <string>
 #include <vector>
 #include <iostream>
 
-struct ToDo {
+class ToDo {
+    public:
     std::string dayOfWeek;
     std::vector<std::string> items;
 
@@ -36,7 +36,6 @@ struct ToDo {
         this->dayOfWeek = other.dayOfWeek;
         this->items = other.items;
 
-        // Return a derefenced pointer to this (in other words return the invoking object)
         return *this;
     }
 
@@ -63,8 +62,9 @@ int main()
     // Copy constructor operator
     {
         ToDo mon("Monday", items);
-        ToDo mon2 = mon;
+        ToDo mon2(mon);
 
+        // Uncomment these lines to see the memory addresses of mon.items and mon2.items
         // std::cout << &mon.items << std::endl;
         // std::cout << &mon2.items << std::endl;
     }
