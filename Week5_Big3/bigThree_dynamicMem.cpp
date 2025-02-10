@@ -50,6 +50,8 @@ struct Grades {
         if (this == &other) {
             return *this;
         }
+        // Free the memory of grades so you have a clean slate
+        delete[] this->grades;
 
         this->capacity = other.capacity;
         this->curr_size = other.curr_size;
