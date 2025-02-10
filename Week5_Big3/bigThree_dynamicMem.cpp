@@ -11,18 +11,34 @@ struct Grades {
         curr_size = 0;
         grades = new int[capacity];
     }
+
+    // Try commenting one out and leaving the other, then seeing the output
+    /* Good Copy Constructor
+     * This copy constructor creates a "deep copy" of the 'grades' from the object it is copying
+     */
     Grades(const Grades& other)
     {
         this->capacity = other.capacity;
         this->curr_size = other.curr_size;
         this->grades = new int[this->capacity];
-        // this->grades = other.grades;  // This is bad!
 
         // Make a deep copy of grades
         for (int i = 0; i < curr_size; i++) {
             this->grades[i] = other.grades[i];
         }
     }
+
+    /* Bad Copy Constructor
+     * This copy constructor creates a "shallow copy" of the 'grades' from the object it is copying
+     */
+    // Grades(const Grades& other)
+    // {
+    //     this->capacity = other.capacity;
+    //     this->curr_size = other.curr_size;
+    //     this->grades = other.grades;  // This is bad!
+    // }
+
+
     Grades& operator=(const Grades& other)
     {
         /* Handle self-assignment
