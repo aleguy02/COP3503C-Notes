@@ -88,7 +88,7 @@ struct Grades {
     {
         std::cout << "{\n";
         for (int i = 0; i < curr_size; i++) {
-            std::cout << "  " << grades[i] << "," << std::endl;
+            std::cout << "  " << grades[i] << ": " << &grades[i] << "," << std::endl;
         }
         std::cout << "}\n";
     }
@@ -96,22 +96,22 @@ struct Grades {
 
 int main()
 {
-    Grades ale;
-    ale.push(1);
-    ale.push(2);
-    ale.push(3);
-    ale.push(4);
-    ale.push(5);
-    ale.display();
+    Grades joe;
+    joe.push(1);
+    joe.push(2);
+    joe.push(3);
+    joe.push(4);
+    joe.push(5);
+    joe.display();
 
-    Grades ben(ale);
+    Grades ben = joe;
     ben.display();
 
-    // Now let's modify ale.grades and see what happens to ben.grades
+    // Now let's modify joe.grades and see what happens to ben.grades
     std::cout << "\n\n";
-    ale.pop();
-    ale.pop();
-    ale.display();
+    joe.pop();
+    joe.pop();
+    joe.display();
     ben.display();
 
     return 0;
