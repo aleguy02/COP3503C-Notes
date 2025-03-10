@@ -25,6 +25,7 @@ struct Grades {
         // Make a deep copy of grades
         for (int i = 0; i < curr_size; i++) {
             this->grades[i] = other.grades[i];
+            std::cout << grades[i] << std::endl;
         }
     }
 
@@ -102,17 +103,17 @@ int main()
     joe.push(3);
     joe.push(4);
     joe.push(5);
-    joe.display();
+    // joe.display();
 
     Grades ben = joe;
-    ben.display();
+    // ben.display();
 
     // Now let's modify joe.grades and see what happens to ben.grades
     std::cout << "\n\n";
     joe.pop();
     joe.pop();
-    joe.display();
-    ben.display();
+    // joe.display();
+    // ben.display();
 
     return 0;
 }

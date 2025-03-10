@@ -6,7 +6,8 @@ struct Node {
     T data;
     Node* next;
 
-    Node(T val) : data(val), next(nullptr) {}
+    Node(const T& val) : data(val), next(nullptr) {}
+    Node(T&& val) : data(std::move(val)), next(nullptr) {}
 };
 
 template<typename T>
@@ -32,16 +33,20 @@ int main()
      * The compiler can infer the data type if we don't explicitly declare it.
      * But, I declared the type explicitly for this example
      */
-    Node<std::string> head("Head");  // OR Node head("Head")
-    Node<std::string> link1("One");
-    Node<std::string> link2("Two");
-    Node<std::string> tail("Tail");
+    // Node<std::string> head("Head");  // OR Node head("Head")
+    // Node<std::string> link1("One");
+    // Node<std::string> link2("Two");
+    // Node<std::string> tail("Tail");
+    auto* head = new Node((std::string)"Head");  // OR Node head("Head")
+    auto* link1 = new Node((std::string)"One");
+    auto* link2 = new Node((std::string)"Two");
+    auto* tail = new Node((std::string)"Tail");
 
     // "Link" our nodes by assigning next pointers
-    head.next = &link1;
-    link1.next = &link2;
-    link2.next = &tail;
+    head->next = link1;
+    link1->next = link2;
+    link2->next = tail;
 
-    printNodes<std::string>(&head);
+    printNodes<std::string>(head);
     return 0;
 }
