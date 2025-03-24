@@ -1,0 +1,20 @@
+default_rule:
+	echo "hello world!"
+
+check_windows_version:
+	ver
+
+check_ubuntu_version:
+	lsb_release -a
+
+windows_make_new_file:
+	copy NUL temp.txt
+
+windows_clean:
+	del temp.txt
+
+linux_make_new_file:
+	touch temp.txt
+
+linux_clean:
+	rm temp.txt

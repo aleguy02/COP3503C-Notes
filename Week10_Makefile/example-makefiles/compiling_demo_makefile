@@ -1,0 +1,11 @@
+build:
+	g++ -std=c++11 -o demo.out src/main.cpp
+
+with_arguments:
+	./demo.out hello world
+	./demo.out engineering stats stinks!
+
+clean:
+	del demo.out
+
+all: build with_arguments clean
