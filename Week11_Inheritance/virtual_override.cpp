@@ -1,55 +1,50 @@
 #include <iostream>
+#include <vector>
+using namespace std;
 
-// topic: virtual-function, pure-virtual-function, abstract-base-class, polymorphism
+// refer to YouTube video for explanation
 
-class Animal {
+class Base {
     public:
-    // Intentionally not virtual:
-    void Move() {
-        std::cout << "This animal moves in some way" << std::endl;
-    }
-    virtual void Feed() = 0;
-};
-
-class Llama : public Animal {
-    public:
-    // The non-virtual function Move is inherited but not overridden.
-    void Feed() override {
-        std::cout << "mmm grass is so yummy!" << std::endl;
+    virtual ~Base() = default;  // this is equivalent to `virtual ~Base() {};`
+    virtual void print()
+    {
+        cout << "print() from Base" << endl;
     }
 };
 
-class Frog : public Animal {
+class Derived : public Base {
     public:
-    // The non-virtual function Move is inherited but not overridden.
-    void Feed() override {
-        std::cout << "wow bugs are so good!" << std::endl;
+    void print() override
+    {
+        cout << "print() from Derived" << endl;
     }
 };
 
-int main() {
-  // Animal is an abstract base class. Abstract base classes are meant ONLY to be "starting points" for derived classes
-  // By design, they can't be initialized. Uncomment the line below and observe the errors
-  // Animal animal;
+int main()
+{
+    {
+        Derived derived;
+        Base* ptr = &derived;
+        ptr->print();
 
-    Llama llama;
-    // llama.Feed();
-
-    /* Practical Application
-     * You might be asking "why is this useful"?
-     * Imagine you have a zoo and want to keep an array of all your animals. You want
-     * to automate feeding them by looping through the array and calling each animal's `Feed` function.
-     * If you're thinking "wait Ale, this isn't possible, you can't have an array containing different data types"
-     * you're absolutely correct. You CANNOT have an array containing different data types.
-     * You CAN, however, upcast `frog` and `llama` into type `Animal`, and store an array of Animal pointers
-     */
-    Frog frog;
-
-    Animal* zoo_animals[2] = {&llama, &frog};
-    int temp = 5;
-    for (Animal* animal : zoo_animals) {
-        animal->Feed();
+        Base base;
+        ptr = &base;
+        ptr->print();
     }
 
-    // RABBIT HOLE ALERT: how does this work? https://en.wikipedia.org/wiki/Dynamic_dispatch
+    {
+        vector<Base*> vec;
+        Derived derived;
+        Base base;
+
+        Base* derived_ptr = &derived;
+        Base* base_ptr = &base;
+
+        vec.push_back(derived_ptr);
+        vec.push_back(base_ptr);
+
+        vec[0]->print();
+        vec[1]->print();
+    }
 }
